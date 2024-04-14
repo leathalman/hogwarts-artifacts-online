@@ -47,6 +47,7 @@ public class Wizard implements Serializable {
     }
 
     public void addArtifact(Artifact artifact) {
+        // Establish a bidirectional relationship
         artifact.setOwner(this);
         this.artifacts.add(artifact);
     }
@@ -58,5 +59,11 @@ public class Wizard implements Serializable {
     public void removeAllArtifacts() {
         this.artifacts.stream().forEach(artifact -> artifact.setOwner(null));
         this.artifacts = new ArrayList<>();
+    }
+
+    public void removeArtifact(Artifact artifactToBeAssigned) {
+        // Remove artifact owner, must cut bidirectional relationship
+        artifactToBeAssigned.setOwner(null);
+        this.artifacts.remove(artifactToBeAssigned);
     }
 }
