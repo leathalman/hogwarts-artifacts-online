@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false) // Turn off Spring Security
 class ArtifactControllerTest {
 
     @Autowired
@@ -42,8 +42,9 @@ class ArtifactControllerTest {
 
     List<Artifact> artifacts;
 
-    @Value("${api.endpoint.base-url}")
+    @Value("${api.endpoint.base-url}") // Spring will go to application.yml to find the value and inject into this field.
     String baseUrl;
+
 
     @BeforeEach
     void setUp() {
@@ -148,7 +149,6 @@ class ArtifactControllerTest {
                 "A Remembrall was a magical large marble-sized glass ball that contained smoke which turned red when its owner or user had forgotten something. It turned clear once whatever was forgotten was remembered.",
                 "ImageUrl",
                 null);
-
         String json = this.objectMapper.writeValueAsString(artifactDto);
 
         Artifact savedArtifact = new Artifact();
@@ -244,6 +244,5 @@ class ArtifactControllerTest {
                 .andExpect(jsonPath("$.message").value("Could not find artifact with Id 1250808601744904191 :("))
                 .andExpect(jsonPath("$.data").isEmpty());
     }
-
 
 }

@@ -13,13 +13,14 @@ public class Wizard implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     private String name;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "owner")
     private List<Artifact> artifacts = new ArrayList<>();
 
-    public Wizard() {
 
+    public Wizard() {
     }
 
     public Integer getId() {
@@ -47,7 +48,6 @@ public class Wizard implements Serializable {
     }
 
     public void addArtifact(Artifact artifact) {
-        // Establish a bidirectional relationship
         artifact.setOwner(this);
         this.artifacts.add(artifact);
     }
@@ -62,8 +62,9 @@ public class Wizard implements Serializable {
     }
 
     public void removeArtifact(Artifact artifactToBeAssigned) {
-        // Remove artifact owner, must cut bidirectional relationship
+        // Remove artifact owner.
         artifactToBeAssigned.setOwner(null);
         this.artifacts.remove(artifactToBeAssigned);
     }
+
 }
