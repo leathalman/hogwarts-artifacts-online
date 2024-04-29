@@ -29,6 +29,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
+@ActiveProfiles(value = "dev")
 public class WizardControllerTest {
 
     @Autowired
