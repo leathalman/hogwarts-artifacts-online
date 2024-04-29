@@ -7,11 +7,10 @@ import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 public class MyUserPrincipal implements UserDetails {
 
-    private HogwartsUser hogwartsUser;
+    private final HogwartsUser hogwartsUser;
 
     public MyUserPrincipal(HogwartsUser hogwartsUser) {
         this.hogwartsUser = hogwartsUser;
